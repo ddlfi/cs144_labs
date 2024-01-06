@@ -3,10 +3,18 @@
 #include "byte_stream.hh"
 
 #include <string>
-
+#include <unordered_map>
+using namespace std;
 class Reassembler
 {
+private:
+  uint64_t bytes_pending_ = 0;
+  uint64_t bytes_pushed = 0;
+  uint64_t last_index = -1;
+  unordered_map<uint64_t,char> buffer;
+  void handle_data_to_buffer(uint64_t first_index,string data,Writer& output);
 public:
+  Reassembler():buffer(){}
   /*
    * Insert a new substring to be reassembled into a ByteStream.
    *   `first_index`: the index of the first byte of the substring

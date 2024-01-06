@@ -11,6 +11,17 @@ void get_URL( const string& host, const string& path )
 {
   cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
   cerr << "Warning: get_URL() has not been implemented yet.\n";
+  Address addr = Address(host,"http");
+  TCPSocket soc;
+  soc.connect(addr);
+  std::string str1 = "GET "+ path +" HTTP/1.1\r\n" + "Host: "+host+"\r\n"+"Connection: close\r\n\r\n";
+  soc.write(str1);
+  string str2;
+  while(!soc.eof()){
+    soc.read(str2);
+    std::cout<<str2;
+  }
+  soc.close();
 }
 
 int main( int argc, char* argv[] )
