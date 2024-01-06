@@ -13,15 +13,16 @@ class ByteStream
 protected:
   uint64_t capacity_;
   // Please add any additional state to the ByteStream here, and not to the Writer and Reader interfaces.
-  std::string stream;      
-  uint64_t occupied_capacity=0;
+  std::string stream;
+  uint64_t occupied_capacity = 0;
   uint64_t poped = 0;
   uint64_t pushed = 0;
   bool closed = false;
   bool _error = false;
   bool finished = false;
+
 public:
-  explicit ByteStream( uint64_t capacity);
+  explicit ByteStream( uint64_t capacity );
 
   // Helper functions (provided) to access the ByteStream's Reader and Writer interfaces
   Reader& reader();
@@ -48,8 +49,8 @@ class Reader : public ByteStream
 public:
   std::string_view peek() const; // Peek at the next bytes in the buffer
   void pop( uint64_t len );      // Remove `len` bytes from the buffer
-  bool is_finished() const; // Is the stream finished (closed and fully popped)?
-  bool has_error() const;   // Has the stream had an error?
+  bool is_finished() const;      // Is the stream finished (closed and fully popped)?
+  bool has_error() const;        // Has the stream had an error?
 
   uint64_t bytes_buffered() const; // Number of bytes currently buffered (pushed and not popped)
   uint64_t bytes_popped() const;   // Total number of bytes cumulatively popped from stream
