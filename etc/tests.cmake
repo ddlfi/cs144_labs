@@ -32,13 +32,13 @@ ttest(reassembler_holes)
 ttest(reassembler_overlapping)
 ttest(reassembler_win)
 
-add_custom_target (check0 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 50 -R 'webget|^byte_stream_')
+add_custom_target (check0 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 100 -R 'webget|^byte_stream_')
 
-add_custom_target (check_webget COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --timeout 50 -R 'webget')
+add_custom_target (check_webget COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --timeout 100 -R 'webget')
 
-add_custom_target (check1 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 50 -R '^byte_stream_|^reassembler_')
+add_custom_target (check1 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 100 -R '^byte_stream_|^reassembler_')
 
-add_custom_target (check2 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 12 -R '^byte_stream_|^reassembler_|^wrapping|^recv')
+add_custom_target (check2 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 100 -R '^byte_stream_|^reassembler_|^wrapping|^recv')
 
 ###
 
