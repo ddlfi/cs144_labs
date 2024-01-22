@@ -22,16 +22,22 @@ uint64_t Wrap32::unwrap( Wrap32 zero_point, uint64_t checkpoint ) const
   if ( tmp1 < ( 1UL << 31 ) ) {
     if ( tmp < ( 1UL << 31 ) )
       result = num * ( 1UL << 32 ) + tmp;
-    else if ( tmp - tmp1 > tmp1 - tmp + ( 1UL << 32 ) )
-      result = ( num - 1 ) * ( 1UL << 32 ) + tmp;
-    else
+    else if ( tmp - tmp1 > ( 1UL << 31 ) ) {
+      if ( num == 0 )
+        result = tmp;
+      else
+        result = ( num - 1 ) * ( 1UL << 32 ) + tmp;
+    } else
       result = num * ( 1UL << 32 ) + tmp;
   } else {
     if ( tmp >= ( 1UL << 31 ) )
       result = num * ( 1UL << 32 ) + tmp;
-    else if ( tmp1 - tmp > tmp - tmp1 + ( 1UL << 32 ) )
-      result = ( num + 1 ) * ( 1UL << 32 ) + tmp;
-    else
+    else if ( tmp1 - tmp > ( 1UL << 31 ) ) {
+      if ( num == ( 1UL << 32 ) - 1 )
+        result = num * ( 1UL << 32 ) + tmp;
+      else
+        result = ( num + 1 ) * ( 1UL << 32 ) + tmp;
+    } else
       result = num * ( 1UL << 32 ) + tmp;
   }
   return { result };

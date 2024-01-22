@@ -1,13 +1,29 @@
 #pragma once
-
 #include "byte_stream.hh"
 #include "tcp_receiver_message.hh"
 #include "tcp_sender_message.hh"
-
+#include <deque>
+using namespace std;
 class TCPSender
 {
   Wrap32 isn_;
+  uint64_t ms_past = 0;
   uint64_t initial_RTO_ms_;
+  uint64_t RTO;
+  uint64_t num_retran = 0;
+  uint64_t bytes_pushed = 0;
+  uint64_t num_flight = 0;
+  Wrap32 ackno;
+  Wrap32 seqno;
+  bool flag = false; // if has got receiver_message
+  bool fin_with_data = false;
+  bool end = false;
+  bool special_case_flag = false;
+  uint16_t window_size = 1;
+  deque<TCPSenderMessage> outstanding_segments;
+  deque<uint64_t> time_;
+  deque<TCPSenderMessage> to_be_send;
+  bool fin = false;
 
 public:
   /* Construct TCP sender with given default Retransmission Timeout and possible ISN */

@@ -21,7 +21,6 @@ int main()
       TCPConfig cfg;
       const Wrap32 isn( rd() );
       cfg.fixed_isn = isn;
-
       TCPSenderTestHarness test { "SYN sent after first push", cfg };
       test.execute( Push {} );
       test.execute( ExpectMessage {}.with_no_flags().with_syn( true ).with_payload_size( 0 ).with_seqno( isn ) );

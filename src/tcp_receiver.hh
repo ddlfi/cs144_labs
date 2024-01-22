@@ -9,6 +9,7 @@ class TCPReceiver
 private:
   Wrap32 ISN;
   bool has_ISN = false;
+  bool has_FIN = false;
 
 public:
   TCPReceiver() : ISN( 0 ) {};

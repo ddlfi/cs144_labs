@@ -60,6 +60,7 @@ int main()
           const uint8_t c = 'a' + ( ( i + j ) % 26 );
           data.push_back( static_cast<char>( c ) );
         }
+        cout << data << " is data in round" << i << endl;
         test.execute( ExpectSeqno { isn + static_cast<uint32_t>( bytes_sent ) + 1 } );
         test.execute( Push { data } );
         bytes_sent += block_size;

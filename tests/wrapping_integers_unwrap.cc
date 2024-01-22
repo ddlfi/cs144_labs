@@ -23,6 +23,7 @@ int main()
     // Non-zero ISN
     test_should_be( Wrap32( UINT32_MAX ).unwrap( Wrap32( 10 ), 3 * ( 1UL << 32 ) ), 3 * ( 1UL << 32 ) - 11 );
     // Big unwrap
+    cout << Wrap32( UINT32_MAX ).unwrap( Wrap32( 0 ), 0 ) << endl;
     test_should_be( Wrap32( UINT32_MAX ).unwrap( Wrap32( 0 ), 0 ), static_cast<uint64_t>( UINT32_MAX ) );
     // Unwrap a non-zero ISN
     test_should_be( Wrap32( 16 ).unwrap( Wrap32( 16 ), 0 ), 0UL );
