@@ -71,7 +71,7 @@ optional<InternetDatagram> NetworkInterface::recv_frame( const EthernetFrame& fr
       if(arp_.find(msg.sender_ip_address)!=arp_.end()){
         arp_.erase(msg.sender_ip_address);  
       }
-      if(msg.opcode == msg.OPCODE_REPLY){
+      if(msg.opcode == msg.OPCODE_REPLY && msg.target_ip_address == ip_address_.ipv4_numeric()){
         if(map.find(ip_address_queue[0].ipv4_numeric()) != map.end()){
           send_datagram(ipdatagram[0],ip_address_queue[0]);
           ipdatagram.pop_front();

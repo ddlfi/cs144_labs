@@ -54,7 +54,14 @@ class Router
 {
   // The router's collection of network interfaces
   std::vector<AsyncNetworkInterface> interfaces_ {};
-
+  struct Route{
+    uint32_t route_prefix {};
+    uint8_t prefix_length {};
+    std::optional<Address> next_hop {};
+    size_t interface_num {};
+  };
+  vector<Route> route_table {};
+  void send_(InternetDatagram datagram);
 public:
   // Add an interface to the router
   // interface: an already-constructed network interface
@@ -64,13 +71,12 @@ public:
     interfaces_.push_back( std::move( interface ) );
     return interfaces_.size() - 1;
   }
-
   // Access an interface by index
   AsyncNetworkInterface& interface( size_t N ) { return interfaces_.at( N ); }
 
   // Add a route (a forwarding rule)
   void add_route( uint32_t route_prefix,
-                  uint8_t prefix_length,
+                  uint8_t prefix_length, 
                   std::optional<Address> next_hop,
                   size_t interface_num );
 
